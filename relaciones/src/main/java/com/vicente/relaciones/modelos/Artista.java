@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -108,6 +109,11 @@ public class Artista {
     public void setCanciones(List<Cancion> canciones) {
         this.canciones = canciones;
     }
+
+    @Transient
+    public String getArtistaCompleto() {
+    return nombre + " " + apellido;
+}
 
     @Override
     public String toString() {

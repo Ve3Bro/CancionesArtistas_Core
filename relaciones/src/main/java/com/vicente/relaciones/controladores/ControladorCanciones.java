@@ -57,15 +57,18 @@ public class ControladorCanciones {
 
     @PostMapping("/canciones/procesa/agregar")
     public String procesarAgregarCancion(@Valid @ModelAttribute("cancion") Cancion nuevaCancion,
-                                         BindingResult validaciones,
-                                         @RequestParam("idArtista")Long idArtista) {
-        if (validaciones.hasErrors()) {
-            return "agregarCanciones";
-        }
-        Artista artista = servicioArtistas.obtenerArtistasPorId(idArtista);
-        this.servicioCanciones.guardarCancion(nuevaCancion);
-        return "redirect:/canciones";
+                                     BindingResult validaciones,
+                                     @RequestParam("idArtista") Long artistaId) {
+    if (validaciones.hasErrors()) {
+        return "agregarCanciones";
     }
+
+    Artista artista = servicioArtistas.obtenerArtistasPorId(artistaId);
+    nuevaCancion.setArtista(artista);
+    this.servicioCanciones.guardarCancion(nuevaCancion);
+    
+    return "redirect:/canciones";
+}
 
     @GetMapping("/canciones/formulario/editar/{id}")
     public String formularioEditarCancion(@PathVariable Long id, Model modelo) {

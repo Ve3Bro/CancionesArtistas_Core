@@ -44,8 +44,19 @@ public class Cancion {
     }
 
     @ManyToOne
-    @JoinColumn(name="cancion_artista")
-    Artista artista;
+    @JoinColumn(name="cancion_artista", nullable = false)
+    private Artista artista;
+
+    @Transient
+    private Long artistaId;
+
+    public Long getIdArtista(){
+        return artistaId;
+    }
+
+    public void setIdArtista(Long artistaId){
+        this.artistaId = artistaId;
+    }
 
     public Long getId() {
         return id;

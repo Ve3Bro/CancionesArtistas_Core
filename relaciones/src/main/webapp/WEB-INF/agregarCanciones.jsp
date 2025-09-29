@@ -19,9 +19,11 @@
                         <td><form:errors path="titulo" cssClass="error" /></td>
                     </tr>
                     <tr>
-                        <td><form:label path="artista">Artista:</form:label></td>
-                        <td><form:select path="artista" /></td>
-                        <td><form:errors path="artista" cssClass="error" /></td>
+                        <td><form:label path="idArtista">Artista:</form:label></td>
+                        <td>
+                            <form:select path="idArtista" items="${artistas}" itemValue="id" itemLabel="ArtistaCompleto"/>
+                        </td>
+                        <td><form:errors path="idArtista" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td><form:label path="album">Album:</form:label></td>

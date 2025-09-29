@@ -26,7 +26,7 @@
                     <td>${artista.biografia}</td>
                     <td>
                         <c:forEach var="cancion" items="${artista.canciones}">
-                            ${cancion.titulo}<br/>
+                            <a href="/canciones/detalle/${cancion.id}">${cancion.titulo}<br/>
                         </c:forEach>
                     </td>
                     <td>${artista.fechaCreacion}</td>

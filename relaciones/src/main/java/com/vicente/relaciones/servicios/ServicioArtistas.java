@@ -1,0 +1,31 @@
+package com.vicente.relaciones.servicios;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vicente.relaciones.modelos.Artista;
+import com.vicente.relaciones.repositorios.RepositorioArtistas;
+
+@Service
+public class ServicioArtistas {
+    @Autowired
+    private RepositorioArtistas repo;
+    
+    public ServicioArtistas(RepositorioArtistas repo){
+        this.repo = repo;
+    }
+
+    public List<Artista> obtenerTodosLosArtistas(){
+        return repo.findAll();
+    }
+    
+    public Artista obtenerArtistasPorId(Long id){
+        return repo.findById(id).orElse(null);
+    }
+
+    public Artista agregarArtista(Artista nuevoArtista){
+        return this.repo.save(nuevoArtista);
+    }
+}

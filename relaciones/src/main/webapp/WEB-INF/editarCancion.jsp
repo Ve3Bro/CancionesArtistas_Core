@@ -21,9 +21,11 @@
                         <td><form:errors path="titulo" cssClass="error" /></td>
                     </tr>
                     <tr>
-                        <td><form:label path="artista">Artista:</form:label></td>
-                        <td><form:input path="artista" /></td>
-                        <td><form:errors path="artista" cssClass="error" /></td>
+                        <td><form:label path="artistaId">Artista:</form:label></td>
+                        <td>
+                            <form:select path="artistaId" items="${artistas}" itemValue="id" itemLabel="ArtistaCompleto"/>
+                        </td>
+                        <td><form:errors path="artistaId" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td><form:label path="album">Álbum:</form:label></td>

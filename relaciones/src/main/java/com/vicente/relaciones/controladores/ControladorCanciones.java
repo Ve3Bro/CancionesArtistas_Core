@@ -58,24 +58,32 @@ public class ControladorCanciones {
     @PostMapping("/canciones/procesa/agregar")
     public String procesarAgregarCancion(@Valid @ModelAttribute("cancion") Cancion nuevaCancion,
                                      BindingResult validaciones,
-                                     @RequestParam("idArtista") Long artistaId) {
-    if (validaciones.hasErrors()) {
-        return "agregarCanciones";
-    }
+                                     @RequestParam("artistaId") Long artistaId) {
+        if (validaciones.hasErrors()) {
+            return "agregarCanciones";
+        }
 
-    Artista artista = servicioArtistas.obtenerArtistasPorId(artistaId);
-    nuevaCancion.setArtista(artista);
-    this.servicioCanciones.guardarCancion(nuevaCancion);
-    
-    return "redirect:/canciones";
+        Artista artista = servicioArtistas.obtenerArtistasPorId(artistaId);
+        nuevaCancion.setArtista(artista);
+        this.servicioCanciones.guardarCancion(nuevaCancion);
+        
+        return "redirect:/canciones";
 }
 
     @GetMapping("/canciones/formulario/editar/{id}")
     public String formularioEditarCancion(@PathVariable Long id, Model modelo) {
+    
         Cancion cancion = servicioCanciones.obtenerCancionPorId(id);
+
+        if (cancion.getArtista() != null) {
+            cancion.setArtistaId(cancion.getArtista().getId());
+        }
         modelo.addAttribute("cancion", cancion);
+        modelo.addAttribute("artistas", servicioArtistas.obtenerTodosLosArtistas());
+
         return "editarCancion";
-    }
+}
+
 
     @PostMapping("/canciones/procesa/editar/{id}")
     public String procesarEditarCancion(@PathVariable Long id,
@@ -84,6 +92,9 @@ public class ControladorCanciones {
         if (validaciones.hasErrors()) {
             return "editarCancion";
         }
+
+        Artista artista = servicioArtistas.obtenerArtistasPorId(cancion.getArtistaId());
+        cancion.setArtista(artista);
 
         cancion.setId(id);
         this.servicioCanciones.actualizaCancion(cancion);

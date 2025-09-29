@@ -50,11 +50,11 @@ public class Cancion {
     @Transient
     private Long artistaId;
 
-    public Long getIdArtista(){
+    public Long getArtistaId(){
         return artistaId;
     }
 
-    public void setIdArtista(Long artistaId){
+    public void setArtistaId(Long artistaId){
         this.artistaId = artistaId;
     }
 
